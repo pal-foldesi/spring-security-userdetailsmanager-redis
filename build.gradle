@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.4.4'
+    implementation 'org.springframework.boot:spring-boot-starter-security:2.4.4'
+    implementation('org.springframework.boot:spring-boot-starter-data-redis:2.4.4') {
+        // see https://stackoverflow.com/questions/33128318/why-getting-noclassdeffound-error-for-jedisconnection-when-using-spring-redis
+        exclude group: 'io.lettuce', module: 'lettuce-core'
+    }
+    implementation 'redis.clients:jedis:3.5.2'
+    implementation 'com.fiftyonred:mock-jedis:0.4.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.4.4'
+}
+
+test {
+    useJUnitPlatform()
+}
